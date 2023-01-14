@@ -29,10 +29,10 @@ function App() {
   };
 
   return (
-    <section className="bg-red-100 min-h-screen w-full flex flex-col">
+    <section className="bg-gradient-to-r from-red-100 to-emerald-300 min-h-screen w-full flex flex-col">
       <div className="container mx-auto px-8 mt-20 space-y-8">
         <div className="flex justify-between w-full">
-          <h2 className="flex justify-center items-center text-2xl md:text-4xl font-bold font-heading text-red-500">
+          <h2 className="flex justify-center items-center text-2xl md:text-4xl font-bold font-heading text-transparent drop-shadow-md shadow-red-300 cursor-pointer animate-[wiggle_1s_ease-in-out_infinite] transition-all ease-linear duration-200 bg-clip-text bg-gradient-to-r from-purple-500 to-red-500">
             GitHub Finder
           </h2>
           <div className="flex justify-center items-center w-1/2 h-12 max-w-2xl">
@@ -43,7 +43,7 @@ function App() {
               type="text"
               name="username"
               id="username"
-              className="shadow-sm text-center focus:ring-emerald-500 p-2 focus:border-emerald-500  sm:text-sm border-slate-500 w-full rounded-full lg:w-1/2"
+              className="shadow-sm text-center focus:ring-emerald-500 p-2 focus:outline-none focus-visible:ring-4 ring-accent ring-offset-white ring-offset-2 hover:bg-none sm:text-sm border-slate-500 w-full rounded-full lg:w-1/2"
               placeholder="Search GitHub User"
             />
           </div>
@@ -51,18 +51,17 @@ function App() {
         {/* Content goes here */}
 
         {loading ? (
-          <h1 className="text-red-500 text-bold text-4xl flex items-start gap-5 h-screen w-screen justify-center font-bold">
-            {" "}
+          <h1 className="text-red-500 text-bold text-2xl md:text-4xl flex items-start gap-5 w-full justify-center font-bold">
             <img src={spinner} alt="spinner" className="w-8 h-8 animate-spin" />
             <span>Loading...</span>
           </h1>
         ) : user === "" ? (
-          <h2 className="text-center text-2xl font-semibold">
+          <h2 className="text-center text-2xl md:text-4xl font-semibold">
             Please Input User
           </h2>
         ) : error ? (
-          <h2 className="text-center text-2xl font-semibold">
-            User {error?.message}
+          <h2 className="text-center text-2xl md:text-4xl font-semibold">
+            {error?.message}
           </h2>
         ) : (
           <div className="max-w-7xl mx-auto text-slate-900">
@@ -81,8 +80,8 @@ function App() {
                       <div className="text-sm">@{profile?.login}</div>
                     </h4>
                   </div>
-                  <div className="px-14 py-8">
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                  <div className="px-14 py-8 space-y-6 font-bold">
+                    <h4 className="">
                       {/* Bio goes here */}
                       Bio:{" "}
                       <span className="font-normal">
@@ -90,7 +89,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                    <h4 className="">
                       {/* Company goes here */}
                       Company:{" "}
                       <span className="font-normal">
@@ -98,7 +97,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                    <h4 className="">
                       {/* Location goes here */}
                       Location:{" "}
                       <span className="font-normal">
@@ -106,7 +105,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                    <h4 className="">
                       {/* followers goes here */}
                       Followers:{" "}
                       <span className="font-normal">
@@ -114,7 +113,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                    <h4 className="">
                       {/* following goes here */}
                       Following:{" "}
                       <span className="font-normal">
@@ -122,14 +121,14 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                    <h4 className="">
                       Repositories:{" "}
                       <span className="ml-2 inline-flex items-center px-2.5 py-1 rounded-2xl text-xs font-medium bg-red-400 text-slate-900">
                         {profile?.public_repos || "N/A"}
                       </span>
                     </h4>
 
-                    <h4 className="mb-8 lg:mb-4 font-bold">
+                    <h4 className="">
                       Gists:{" "}
                       <span className="ml-2 inline-flex items-center px-2.5 py-1 rounded-2xl text-xs font-medium bg-red-400 text-slate-900">
                         {profile?.public_gists || "N/A"}

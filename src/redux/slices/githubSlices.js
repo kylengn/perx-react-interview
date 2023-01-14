@@ -4,8 +4,7 @@ import axios from "axios";
 const config = {
   headers: {
     // Authorization: `Token ${import.meta.env.REACT_APP_GITHUB_TOKEN}`,
-
-    Authorization: `Token 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`,
+    Authorization: `Token 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`,
   },
 };
 
@@ -17,7 +16,7 @@ export const fetchReposAction = createAsyncThunk(
     try {
       // Make HTTP call
       const { data } = await axios.get(
-        `https://api.github.com/users/${user}/repos?per_page=10&sort=asc`,
+        `https://api.github.com/users/${user}/repos?per_page=30&sort=asc`,
         config
       );
       return data;
