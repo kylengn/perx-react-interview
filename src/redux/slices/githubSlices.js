@@ -3,8 +3,8 @@ import axios from "axios";
 
 const config = {
   headers: {
-    // Authorization: `Token ${import.meta.env.REACT_APP_GITHUB_TOKEN}`,
-    Authorization: `Token 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`,
+    Authorization: `${import.meta.env.REACT_APP_GITHUB_TOKEN}`,
+    // Authorization: `Token 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`,
   },
 };
 
