@@ -4,7 +4,7 @@ import axios from "axios";
 const config = {
   headers: {
     // Authorization: `Token ${import.meta.env.REACT_APP_GITHUB_TOKEN}`,
-    Authorization: `Token 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`,
+    Authorization: `Token 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`,
   },
 };
 
