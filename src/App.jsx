@@ -6,7 +6,13 @@ import {
   fetchUserOrgsAction,
 } from "./redux/slices/githubSlices";
 import "./App.css";
-import { h2Style, inputStyle, sectionStyle, logoStyle } from "./styles";
+import {
+  h2Style,
+  inputStyle,
+  sectionStyle,
+  logoStyle,
+  footerStyle,
+} from "./styles";
 import spinner from "./assets/spinner.svg";
 import github from "./assets/github.svg";
 import Button from "./components/Button";
@@ -83,15 +89,15 @@ function App() {
 
   return (
     <section className={sectionStyle}>
-      <div className="container mx-auto px-6 mt-16 space-y-8">
-        <div className="flex justify-between w-full">
+      <div className="container mx-auto px-6 mt-10 space-y-8">
+        <div className="flex flex-col md:flex-row justify-between w-full gap-4">
           <h2 className={h2Style}>
             <img src={github} alt="logo" className={logoStyle} />
             Findr
           </h2>
           {localStorage.getItem("accessToken") !== null ? (
-            <div className="flex items-center">
-              <div className="flex justify-center items-center w-1/2 h-12 max-w-2xl">
+            <div className="flex items-center gap-4">
+              <div className="flex justify-center items-center w-full h-12 max-w-2xl">
                 {/* Search input for user */}
                 <input
                   value={user}
@@ -149,6 +155,11 @@ function App() {
           </div>
         )}
       </div>
+
+      <footer className="flex w-full justify-center items-center gap-2 h-16">
+        <h4 className={footerStyle}>Developed by Kyle Nguyen </h4>
+        <span className="text-xl md:text-2xl">👋</span>
+      </footer>
     </section>
   );
 }
