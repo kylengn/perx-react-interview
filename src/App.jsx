@@ -37,9 +37,12 @@ function App() {
 
     if (codeParam && localStorage.getItem("accessToken") === null) {
       async function getAccessToken() {
-        await fetch("http://localhost:4000/getAccessToken?code=" + codeParam, {
-          method: "GET",
-        })
+        await fetch(
+          "https://gitfindr-server.vercel.app/getAccessToken?code=" + codeParam,
+          {
+            method: "GET",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);
