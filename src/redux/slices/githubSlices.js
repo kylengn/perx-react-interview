@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-localStorage.setItem("accessToken", `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`);
+// localStorage.setItem("accessToken", `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`);
 
 const config = {
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    // Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    Authorization: `${import.meta.env.REACT_APP_GITHUB_TOKEN}`,
   },
 };
 
