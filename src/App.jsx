@@ -7,9 +7,10 @@ import {
 } from "./redux/slices/githubSlices";
 import "./App.css";
 import spinner from "./assets/spinner.svg";
+import github from "./assets/github.svg";
 
 function App() {
-  const [user, setUser] = useState("kylengn");
+  const [user, setUser] = useState("");
   // Get data from store
   const repos = useSelector((state) => state?.repos);
   const { loading, profile, reposList, orgs, error } = repos;
@@ -20,6 +21,7 @@ function App() {
     dispatch(fetchReposAction(user));
     dispatch(fetchProfileAction(user));
     dispatch(fetchUserOrgsAction(user));
+    localStorage.clear();
   }, [user, dispatch]);
 
   // console.log(user);
@@ -30,10 +32,15 @@ function App() {
 
   return (
     <section className="bg-gradient-to-r from-red-100 to-emerald-300 min-h-screen w-full flex flex-col">
-      <div className="container mx-auto px-8 mt-20 space-y-8">
+      <div className="container mx-auto px-6 mt-16 space-y-8">
         <div className="flex justify-between w-full">
-          <h2 className="flex justify-center items-center text-2xl md:text-4xl font-bold font-heading text-transparent drop-shadow-md shadow-red-300 cursor-pointer animate-[wiggle_1s_ease-in-out_infinite] transition-all ease-linear duration-200 bg-clip-text bg-gradient-to-r from-purple-500 to-red-500">
-            GitHub Finder
+          <h2 className="flex justify-center items-center text-3xl md:text-4xl font-bold font-heading text-transparent drop-shadow-lg shadow-red-300 cursor-pointer bg-clip-text bg-gradient-to-r from-purple-500 to-red-500 tracking-wider gap-2">
+            <img
+              src={github}
+              alt="logo"
+              className="w-16 h-16 animate-[wiggle_1s_ease-in-out_infinite] transition-all ease-linear duration-200 drop-shadow-lg"
+            />
+            Findr
           </h2>
           <div className="flex justify-center items-center w-1/2 h-12 max-w-2xl">
             {/* Search input for user */}
@@ -48,8 +55,8 @@ function App() {
             />
           </div>
         </div>
-        {/* Content goes here */}
 
+        {/* Content goes here */}
         {loading ? (
           <h1 className="text-red-500 text-bold text-2xl md:text-4xl flex items-start gap-5 w-full justify-center font-bold">
             <img src={spinner} alt="spinner" className="w-8 h-8 animate-spin" />
@@ -68,20 +75,22 @@ function App() {
             <div className="flex flex-wrap mb-20">
               <div className="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
                 <div className="bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl shadow-lg">
-                  <div className="flex justify-center items-center w-full gap-8">
+                  <div className="flex justify-center items-center w-full gap-4 md:gap-8 pt-8">
                     {/* Avatar image */}
                     <img
-                      className="w-32 h-32 rounded-full mt-8 shadow-lg"
+                      className="w-16 md:w-32 h-16 md:h-32 rounded-full shadow-lg"
                       src={profile?.avatar_url}
                       alt="avatar"
                     />
-                    <h4 className="font-bold text-xl">
+                    <h4 className="font-bold text-xl md:text-3xl">
                       {profile?.name}
-                      <div className="text-sm">@{profile?.login}</div>
+                      <div className="text-sm md:text-base">
+                        @{profile?.login}
+                      </div>
                     </h4>
                   </div>
-                  <div className="px-14 py-8 space-y-6 font-bold">
-                    <h4 className="">
+                  <div className="px-6 md:px-14 py-8 space-y-6 font-bold">
+                    <h4>
                       {/* Bio goes here */}
                       Bio:{" "}
                       <span className="font-normal">
@@ -89,7 +98,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="">
+                    <h4>
                       {/* Company goes here */}
                       Company:{" "}
                       <span className="font-normal">
@@ -97,7 +106,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="">
+                    <h4>
                       {/* Location goes here */}
                       Location:{" "}
                       <span className="font-normal">
@@ -105,7 +114,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="">
+                    <h4>
                       {/* followers goes here */}
                       Followers:{" "}
                       <span className="font-normal">
@@ -113,7 +122,7 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="">
+                    <h4>
                       {/* following goes here */}
                       Following:{" "}
                       <span className="font-normal">
@@ -121,14 +130,14 @@ function App() {
                       </span>
                     </h4>
 
-                    <h4 className="">
+                    <h4>
                       Repositories:{" "}
                       <span className="ml-2 inline-flex items-center px-2.5 py-1 rounded-2xl text-xs font-medium bg-red-400 text-slate-900">
                         {profile?.public_repos || "N/A"}
                       </span>
                     </h4>
 
-                    <h4 className="">
+                    <h4>
                       Gists:{" "}
                       <span className="ml-2 inline-flex items-center px-2.5 py-1 rounded-2xl text-xs font-medium bg-red-400 text-slate-900">
                         {profile?.public_gists || "N/A"}
@@ -139,7 +148,7 @@ function App() {
                       <a
                         href={profile?.html_url}
                         target="_blank"
-                        className="px-8 py-4 border-2 border-emerald-500 hover:text-white hover:bg-emerald-500 transition-all duration-200 rounded-full font-bold ease-in-out"
+                        className="px-8 py-2 border-2 border-emerald-500 hover:text-white hover:bg-emerald-500 transition-all duration-200 rounded-full font-bold ease-in-out"
                       >
                         View Profile
                       </a>
@@ -175,6 +184,7 @@ function App() {
                 </div>
 
                 <div className="text-2xl font-bold my-8">Organizations</div>
+                {/* Loop this */}
                 <div className="flex flex-wrap gap-2">
                   {orgs?.length !== 0 ? (
                     orgs?.map((org, index) => (
