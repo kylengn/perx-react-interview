@@ -10,7 +10,7 @@ import spinner from "./assets/spinner.svg";
 import github from "./assets/github.svg";
 
 function App() {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("kylengn");
   // Get data from store
   const repos = useSelector((state) => state?.repos);
   const { loading, profile, reposList, orgs, error } = repos;
@@ -21,7 +21,6 @@ function App() {
     dispatch(fetchReposAction(user));
     dispatch(fetchProfileAction(user));
     dispatch(fetchUserOrgsAction(user));
-    localStorage.clear();
   }, [user, dispatch]);
 
   // console.log(user);

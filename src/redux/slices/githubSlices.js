@@ -1,11 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// localStorage.setItem("accessToken", `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`);
+// localStorage.setItem(
+//   "accessToken",
+//   `${import.meta.env.REACT_APP_GITHUB_TOKEN}`
+// );
+
+// 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
+
+// localStorage.setItem(
+//   "accessToken",
+//   `Bearer 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`
+// );
 
 const config = {
   headers: {
-    // Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    // Authorization: `${localStorage.getItem("accessToken")}`,
     Authorization: `${import.meta.env.REACT_APP_GITHUB_TOKEN}`,
   },
 };
