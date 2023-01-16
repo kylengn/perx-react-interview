@@ -6,19 +6,12 @@ import {
   fetchUserOrgsAction,
 } from "./redux/slices/githubSlices";
 import "./App.css";
-import {
-  h2Style,
-  inputStyle,
-  sectionStyle,
-  logoStyle,
-  footerStyle,
-} from "./styles";
+import { sectionStyle, footerStyle } from "./styles";
 import spinner from "./assets/spinner.svg";
-import github from "./assets/github.svg";
-import Button from "./components/Button";
 import Profile from "./components/Profile";
 import Repos from "./components/Repos";
 import Orgs from "./components/Orgs";
+import Header from "./components/Header";
 
 // Foward the user to the Github login screen (Pass in the ClientID)
 // User is now on the Github side and logs in (github.com/login)
@@ -75,58 +68,33 @@ function App() {
   }, [user, dispatch]);
 
   // console.log(user);
+
   const handleInputChange = (e) => {
     e.preventDefault();
     setUser(e.target.value);
-    // setRerender(!rerender);
+  };
+
+  const logOutGithub = () => {
+    localStorage.removeItem("accessToken");
+    setRerender(!rerender);
   };
 
   const logInWithGithub = () => {
     window.location.assign(
       "https://github.com/login/oauth/authorize?client_id=" + CLIENT_ID
     );
+    setRerender(!rerender);
   };
 
   return (
     <section className={sectionStyle}>
       <div className="container mx-auto px-6 mt-10 space-y-8">
-        <div className="flex flex-col md:flex-row justify-between w-full gap-4">
-          <h2 className={h2Style}>
-            <img src={github} alt="logo" className={logoStyle} />
-            Findr
-          </h2>
-          {localStorage.getItem("accessToken") !== null ? (
-            <div className="flex items-center gap-4">
-              <div className="flex justify-center items-center w-full h-12 max-w-2xl">
-                {/* Search input for user */}
-                <input
-                  value={user}
-                  onChange={handleInputChange}
-                  type="text"
-                  name="username"
-                  id="username"
-                  className={inputStyle}
-                  placeholder="@username"
-                />
-              </div>
-              <Button
-                name="Logout"
-                onClick={() => {
-                  localStorage.removeItem("accessToken");
-                  setRerender(!rerender);
-                }}
-              />
-            </div>
-          ) : (
-            <Button
-              name="Login with Github"
-              onClick={() => {
-                logInWithGithub();
-                setRerender(!rerender);
-              }}
-            />
-          )}
-        </div>
+        <Header
+          logOutGithub={logOutGithub}
+          logInWithGithub={logInWithGithub}
+          handleInputChange={handleInputChange}
+          user={user}
+        />
 
         {/* Content goes here */}
         {loading ? (
@@ -156,7 +124,7 @@ function App() {
         )}
       </div>
 
-      <footer className="flex w-full justify-center items-center gap-2 h-16">
+      <footer className="flex w-full justify-center items-center gap-2 h-32">
         <h4 className={footerStyle}>Developed by Kyle Nguyen </h4>
         <span className="text-xl md:text-2xl">👋</span>
       </footer>
